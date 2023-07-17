@@ -26,6 +26,10 @@ function index() {
         {
           header: 'Constiuencies',
           accessorKey: 'constituencies',
+        },
+        {
+          header: 'See Constituencies',
+          accessorKey: 'linkToConstituencies',
         }
       ]
 

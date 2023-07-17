@@ -6,6 +6,7 @@ import {
     getSortedRowModel,
     useReactTable,
   } from '@tanstack/react-table'
+import Link from 'next/link'
   import { useState } from 'react'
   
   export default function BasicTable({ data, columns }) {
@@ -71,11 +72,13 @@ import {
           <tbody className='w-full'>
             {table.getRowModel().rows.map(row => (
               <tr key={row.id}>
-                {row.getVisibleCells().map(cell => (
+                {row.getVisibleCells().map(cell => {
+                  console.log(cell);
+                  return (
                   <td key={cell.id} className=''>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    {flexRender(cell.column.id === "linkToConstituencies" ? <Link href={cell.renderValue()} passHref>See Constituencies</Link> : cell.column.columnDef.cell, cell.getContext())}
                   </td>
-                ))}
+                )})}
               </tr>
             ))}
           </tbody>

@@ -47,13 +47,30 @@ export function StateProvider({ children }) {
     getAge();
   }, [contract]);
 
+  const addNewConstituency = async (e, stateId) => {
+    e.preventDefault()
+    const name = e.target.constituency.value
+    const loadingToast = toast.loading('Adding new constituency...')
+    try {
+      const data = await contract.call("createNewConstituency", [name, stateId])
+      toast.success('New constituency added successfully')
+      getConstituencies(stateId)
+    }
+    catch(err) {
+      console.log(err)
+      toast.error('Something went wrong')
+    }
+    finally {
+      toast.dismiss(loadingToast)
+    }
+  }
   const addNewState = async (e) => {
     e.preventDefault()
     const state = e.target.state.value
     const loadingToast = toast.loading('Adding new state...')
     try {
       const data = await contract.call("createNewState", [state])      
-      toast.success('New state successfully')
+      toast.success('New state added successfully')
       getStates()
     }
     catch(err) {
@@ -90,13 +107,24 @@ export function StateProvider({ children }) {
     console.log(data);
     let stateList = data.map((item,index) => (
       {
-        id: index,
+        id: index + 1,
         name: item.name,
         constituencies: item.registeredConstituencies
       }
     ))
-    stateList = stateList.filter(item => item.name !== '').map(item => ({...item, constituencies: item.constituencies.length}))
+    stateList = stateList.filter(item => item.name !== '').map(item => ({...item, constituencies: item.constituencies.length, linkToConstituencies: `/state/${item.name}/${item.id - 1}` }))
     setStates(prev => stateList)
+  }
+
+  const [constituencyList, setConstituencyList] = useState([])
+
+  const getConstituencies = async (stateId) => {
+    const data = await contract.call("getConstituencies", [stateId])
+    console.log(data)
+    setConstituencyList(prev => data.map((item,index) => ({
+      id: index + 1,
+      name: item.name,
+    })))
   }
 
   return (
@@ -111,7 +139,10 @@ export function StateProvider({ children }) {
         setNewMinimumVotingAge,
         addNewState,
         states,
-        getStates
+        getStates,
+        getConstituencies,
+        constituencyList,
+        addNewConstituency
       }}
     >
       {children}
