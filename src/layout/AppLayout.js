@@ -2,11 +2,12 @@ import React from "react";
 import { useStateContext } from "@/context";
 import Loading from "@/components/Loading";
 import Navbar from "@/components/Navbar";
+import ConnectBtn from "@/components/ConnectBtn";
 
 function AppLayout({ children }) {
-  const { contract } = useStateContext();
+  const { contract, address } = useStateContext();
 
-  if (!contract) return <Loading />;
+  if (!contract || !address) return <Loading />;
 
   return (
     <div>
