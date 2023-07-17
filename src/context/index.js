@@ -47,6 +47,23 @@ export function StateProvider({ children }) {
     getAge();
   }, [contract]);
 
+  const addNewState = async (e) => {
+    e.preventDefault()
+    const state = e.target.state.value
+    const loadingToast = toast.loading('Adding new state...')
+    try {
+      const data = await contract.call("createNewState", [state])      
+      toast.success('New state successfully')
+      getStates()
+    }
+    catch(err) {
+      console.log(err)
+      toast.error('Something went wrong')
+    }
+    finally {
+      toast.dismiss(loadingToast)
+    }
+  }
   const setNewMinimumVotingAge = async (e) => {
     e.preventDefault()
     const age = e.target.age.value
@@ -66,6 +83,22 @@ export function StateProvider({ children }) {
     }
   }
 
+  const [states,setStates] = useState([])
+
+  const getStates = async () => {
+    const data = await contract?.call("getStates", []);
+    console.log(data);
+    let stateList = data.map((item,index) => (
+      {
+        id: index,
+        name: item.name,
+        constituencies: item.registeredConstituencies
+      }
+    ))
+    stateList = stateList.filter(item => item.name !== '').map(item => ({...item, constituencies: item.constituencies.length}))
+    setStates(prev => stateList)
+  }
+
   return (
     <StateContext.Provider
       value={{
@@ -75,7 +108,10 @@ export function StateProvider({ children }) {
         electionCommission,
         isElectionCommission,
         age,
-        setNewMinimumVotingAge
+        setNewMinimumVotingAge,
+        addNewState,
+        states,
+        getStates
       }}
     >
       {children}

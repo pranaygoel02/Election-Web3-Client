@@ -10,7 +10,7 @@ function index() {
  
 
   return (
-    <div className='container space-y-4'>
+    <div className='container'>
         <h1 className='heading'>Election Preferences</h1>
         <p className='subtitle'>Set qualification preferences to become a voter.</p>
         <form onSubmit={setNewMinimumVotingAge}>

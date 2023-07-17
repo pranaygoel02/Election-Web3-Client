@@ -11,6 +11,7 @@ import {
 import Logo from "./Logo";
 import Link from "next/link";
 import { UserAddress } from "./ConnectBtn";
+import { MdOutlineAddLocation } from "react-icons/md";
 
 function Sidebar() {
   return (
@@ -21,6 +22,9 @@ function Sidebar() {
       <div className="flex flex-col gap-2 py-4 justify-center w-full">
       <Link className="sidebar-link" passHref href="/">
         <IoHomeOutline /> Home
+      </Link>
+      <Link className="sidebar-link" passHref href="/state">
+        <MdOutlineAddLocation /> States
       </Link>
       <Link className="sidebar-link" passHref href="/settings">
         <IoSettings /> Preferences
