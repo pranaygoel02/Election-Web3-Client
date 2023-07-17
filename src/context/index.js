@@ -47,24 +47,24 @@ export function StateProvider({ children }) {
     getAge();
   }, [contract]);
 
-  // const setNewMinimumVotingAge = async (e) => {
-  //   e.preventDefault()
-  //   const age = e.target.age.value
-  //   const loadingToast = toast.loading('Updating minimum voting age...')
-  //   try {
-  //     const data = await contract?.call("setMinimumVotingAge", [age])
-  //     console.log(data)
-  //     setAge(prev => age)
-  //     toast.success('Minimum voting age updated successfully')
-  //   }
-  //   catch(err) {
-  //     console.log(err)
-  //     toast.error('Something went wrong')
-  //   }
-  //   finally {
-  //     toast.dismiss(loadingToast)
-  //   }
-  // }
+  const setNewMinimumVotingAge = async (e) => {
+    e.preventDefault()
+    const age = e.target.age.value
+    const loadingToast = toast.loading('Updating minimum voting age...')
+    try {
+      const data = await contract?.call("setMinimumVotingAge", [age])
+      console.log(data)
+      setAge(prev => age)
+      toast.success('Minimum voting age updated successfully')
+    }
+    catch(err) {
+      console.log(err)
+      toast.error('Something went wrong')
+    }
+    finally {
+      toast.dismiss(loadingToast)
+    }
+  }
 
   return (
     <StateContext.Provider
@@ -75,7 +75,7 @@ export function StateProvider({ children }) {
         electionCommission,
         isElectionCommission,
         age,
-        // setNewMinimumVotingAge
+        setNewMinimumVotingAge
       }}
     >
       {children}

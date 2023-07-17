@@ -19,7 +19,7 @@ function Sidebar() {
         <Logo />
       </div>
       <div className="flex flex-col gap-2 py-4 justify-center w-full">
-      <Link className="sidebar-link" passHref href="">
+      <Link className="sidebar-link" passHref href="/">
         <IoHomeOutline /> Home
       </Link>
       <Link className="sidebar-link" passHref href="/settings">

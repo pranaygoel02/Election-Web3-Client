@@ -4,7 +4,7 @@ import { useStateContext } from '@/context'
 
 function index() {
 
-  const {age} = useStateContext()
+  const {age, setNewMinimumVotingAge} = useStateContext()
 
   const [newAge, setAge] = useState(age)
  
@@ -13,7 +13,7 @@ function index() {
     <div className='container space-y-4'>
         <h1 className='heading'>Election Preferences</h1>
         <p className='subtitle'>Set qualification preferences to become a voter.</p>
-        <form>
+        <form onSubmit={setNewMinimumVotingAge}>
             <Input cb={setAge} value={newAge} required={true} show={true} type='number' id='age' name='age' min='18' max='100' label='Minimum Age'/>
             <button className='primary-btn' type="submit">Save</button>
         </form>
