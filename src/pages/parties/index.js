@@ -10,7 +10,9 @@ function index() {
   const [stateId, setStateId] = useState(null);
   const [isNational, setIsNational] = useState(false);
 
-  const { states, getStates, addNewParty, getParties, parties } = useStateContext();
+  const { states, getStates, addNewParty, getParties, parties, isElectionCommission } = useStateContext();
+
+  if(!isElectionCommission) return null;
   
   useEffect(() => {
       getStates()

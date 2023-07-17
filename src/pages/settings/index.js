@@ -4,7 +4,9 @@ import { useStateContext } from '@/context'
 
 function index() {
 
-  const {age, setNewMinimumVotingAge} = useStateContext()
+  const {age, setNewMinimumVotingAge, isElectionCommission} = useStateContext() 
+
+  if(!isElectionCommission) return null;
 
   const [newAge, setAge] = useState(age)
  

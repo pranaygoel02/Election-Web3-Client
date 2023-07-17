@@ -76,7 +76,7 @@ import Link from 'next/link'
                   console.log(cell);
                   return (
                   <td key={cell.id} className=''>
-                    {flexRender(cell.column.id === "linkToConstituencies" ? <Link href={cell.renderValue()} passHref>See Constituencies</Link> : cell.column.columnDef.cell, cell.getContext())}
+                    {flexRender(cell.column.id === "linkToConstituencies" ? <Link className='primary-btn' href={cell.renderValue()} passHref>See Constituencies</Link> : cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 )})}
               </tr>

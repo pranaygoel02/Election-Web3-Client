@@ -37,6 +37,14 @@ button {
   border-radius: 10px;
 }
 
+#home {
+  background-image: url('../assets/images/home_bg_1.jpg');
+  background-color: #f3f3eb;
+  background-size: contain;
+  background-size: 70%;
+  @apply bg-bottom flex items-center justify-center text-center bg-no-repeat;
+}
+
 .container {
   @apply p-6 space-y-4;
 }

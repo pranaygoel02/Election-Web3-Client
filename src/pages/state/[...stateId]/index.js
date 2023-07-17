@@ -11,8 +11,10 @@ function index() {
   } = router.query;
   console.log(name, _stateId);
 
-  const { getConstituencies, constituencyList, addNewConstituency } = useStateContext();
+  const { getConstituencies, constituencyList, addNewConstituency, isElectionCommission } = useStateContext();
   const [newConstituency, setNewConstituency] = useState(null);
+
+  if(!isElectionCommission) return null;
 
   useEffect(() => {
     getConstituencies(_stateId);

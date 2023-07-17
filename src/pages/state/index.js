@@ -5,12 +5,15 @@ import BasicTable from "@/components/BasicTable";
 
 function index() {
 
-    const {addNewState, states, getStates } = useStateContext();
+    const {addNewState, states, getStates, isElectionCommission } = useStateContext();
     const [newState, setNewState] = useState(null)
+
+    if(!isElectionCommission) return null;
 
     useEffect(() => {
         getStates()
     }, [])
+    
 
     console.log(states);
 
@@ -28,7 +31,7 @@ function index() {
           accessorKey: 'constituencies',
         },
         {
-          header: 'See Constituencies',
+          header: '',
           accessorKey: 'linkToConstituencies',
         }
       ]
