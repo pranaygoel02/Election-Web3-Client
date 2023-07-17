@@ -1,5 +1,6 @@
 import {
   IoCalendarClearOutline,
+  IoFlagOutline,
   IoHomeOutline,
   IoLogOutOutline,
   IoNotificationsOutline,
@@ -25,6 +26,9 @@ function Sidebar() {
       </Link>
       <Link className="sidebar-link" passHref href="/state">
         <MdOutlineAddLocation /> States
+      </Link>
+      <Link className="sidebar-link" passHref href="/parties">
+        <IoFlagOutline /> Parties
       </Link>
       <Link className="sidebar-link" passHref href="/settings">
         <IoSettings /> Preferences

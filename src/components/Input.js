@@ -78,11 +78,11 @@ function Input({
                 type={type}
                 onChange={(e) => {
                   e?.preventDefault();
-                  cb((prev) => e.target.value);
+                  cb((prev) => type === 'file' ? {file: e.target.files[0], value: e.target.value} : e.target.value);
                 }}
                 value={value}
                 placeholder={placeholder}
-                className="p-2 w-full bg-transparent focus-within:outline-none focus-within:border-none disabled:text-neutral-500"
+                className="p-2 w-full bg-transparent focus-within:outline-none focus-within:border-none disabled:text-neutral-500 file:bg-blue-600 file:border-none file:outline-none file:text-white file:font-bold file:rounded-md file:px-4 file:py-2 file:cursor-pointer file:shadow-lg file:hover:bg-blue-600 file:transition-colors file:duration-300 file:ease-in-out file:disabled:bg-blue-500"
               />
             )}
             {rightIcon}
